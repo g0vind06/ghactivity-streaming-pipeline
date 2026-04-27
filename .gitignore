@@ -1,0 +1,5 @@
+kp_venv/
+.ipynb_checkpoints/
+*.pyc
+--pycache__/
+.env

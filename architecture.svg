@@ -1,0 +1,94 @@
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
+  <!-- Background -->
+  <rect width="1000" height="400" fill="#0d1117"/>
+  
+  <!-- Title -->
+  <text x="500" y="35" text-anchor="middle" fill="#58a6ff" font-size="18" font-weight="bold" letter-spacing="2">GitHub Activity Real-Time Streaming Pipeline</text>
+
+  <!-- GH Archive Box -->
+  <rect x="30" y="100" width="150" height="80" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="105" y="130" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">GH Archive</text>
+  <text x="105" y="148" text-anchor="middle" fill="#8b949e" font-size="9">data.gharchive.org</text>
+  <text x="105" y="165" text-anchor="middle" fill="#8b949e" font-size="9">YYYY-MM-DD-H.json.gz</text>
+
+  <!-- Arrow 1 -->
+  <line x1="180" y1="140" x2="230" y2="140" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="205" y="130" text-anchor="middle" fill="#8b949e" font-size="8">HTTP GET</text>
+  <text x="205" y="155" text-anchor="middle" fill="#8b949e" font-size="8">stream=True</text>
+
+  <!-- Producer Box -->
+  <rect x="230" y="100" width="150" height="80" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="305" y="128" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="bold">Producer Script</text>
+  <text x="305" y="146" text-anchor="middle" fill="#8b949e" font-size="9">Python + boto3</text>
+  <text x="305" y="162" text-anchor="middle" fill="#8b949e" font-size="9">requests + gzip</text>
+  <text x="305" y="175" text-anchor="middle" fill="#8b949e" font-size="9">put_record()</text>
+
+  <!-- Arrow 2 -->
+  <line x1="380" y1="140" x2="430" y2="140" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="405" y="130" text-anchor="middle" fill="#8b949e" font-size="8">put_record()</text>
+  <text x="405" y="155" text-anchor="middle" fill="#8b949e" font-size="8">PartitionKey=type</text>
+
+  <!-- Kinesis Box -->
+  <rect x="430" y="80" width="160" height="120" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="510" y="108" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="bold">Kinesis Data Stream</text>
+  <text x="510" y="125" text-anchor="middle" fill="#8b949e" font-size="9">ghactivity-stream</text>
+  <!-- Shard visual -->
+  <rect x="450" y="133" width="120" height="22" rx="4" fill="#21262d" stroke="#30363d"/>
+  <text x="510" y="148" text-anchor="middle" fill="#e3b341" font-size="9">Shard 0 — 1 MB/s</text>
+  <text x="510" y="175" text-anchor="middle" fill="#8b949e" font-size="8">Retention: 24hrs</text>
+  <text x="510" y="190" text-anchor="middle" fill="#8b949e" font-size="8">Max record: 1024 KB</text>
+
+  <!-- Arrow 3 -->
+  <line x1="590" y1="140" x2="640" y2="140" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="615" y="130" text-anchor="middle" fill="#8b949e" font-size="8">Trigger</text>
+  <text x="615" y="155" text-anchor="middle" fill="#8b949e" font-size="8">batch=100</text>
+
+  <!-- Lambda Box -->
+  <rect x="640" y="100" width="150" height="80" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="715" y="128" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">AWS Lambda</text>
+  <text x="715" y="146" text-anchor="middle" fill="#8b949e" font-size="9">ghactivity-consumer</text>
+  <text x="715" y="162" text-anchor="middle" fill="#8b949e" font-size="9">base64 decode</text>
+  <text x="715" y="175" text-anchor="middle" fill="#8b949e" font-size="9">partition by date</text>
+
+  <!-- Arrow 4 -->
+  <line x1="790" y1="140" x2="840" y2="140" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="815" y="130" text-anchor="middle" fill="#8b949e" font-size="8">put_object()</text>
+  <text x="815" y="155" text-anchor="middle" fill="#8b949e" font-size="8">partitioned</text>
+
+  <!-- S3 Box -->
+  <rect x="840" y="100" width="140" height="80" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="910" y="128" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="bold">Amazon S3</text>
+  <text x="910" y="146" text-anchor="middle" fill="#8b949e" font-size="9">year=YYYY/</text>
+  <text x="910" y="160" text-anchor="middle" fill="#8b949e" font-size="9">month=MM/</text>
+  <text x="910" y="174" text-anchor="middle" fill="#8b949e" font-size="9">day=DD/</text>
+
+  <!-- Bottom labels -->
+  <text x="105" y="215" text-anchor="middle" fill="#6e7681" font-size="9">Data Source</text>
+  <text x="305" y="215" text-anchor="middle" fill="#6e7681" font-size="9">Event Producer</text>
+  <text x="510" y="235" text-anchor="middle" fill="#6e7681" font-size="9">Stream Buffer</text>
+  <text x="715" y="215" text-anchor="middle" fill="#6e7681" font-size="9">Serverless Consumer</text>
+  <text x="910" y="215" text-anchor="middle" fill="#6e7681" font-size="9">Partitioned Data Lake</text>
+
+  <!-- IAM Role note -->
+  <rect x="640" y="240" width="340" height="40" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="810" y="258" text-anchor="middle" fill="#8b949e" font-size="9">IAM Role: Kinesis Read + S3 Write + CloudWatch Logs</text>
+  <text x="810" y="273" text-anchor="middle" fill="#8b949e" font-size="9">Secrets managed via environment variables</text>
+
+  <!-- Tech stack footer -->
+  <rect x="30" y="310" width="940" height="60" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="500" y="332" text-anchor="middle" fill="#6e7681" font-size="10" letter-spacing="1">TECH STACK</text>
+  <text x="150" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">Python 3.12</text>
+  <text x="280" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">boto3</text>
+  <text x="390" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">requests + gzip</text>
+  <text x="510" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">AWS Kinesis</text>
+  <text x="630" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">AWS Lambda</text>
+  <text x="750" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">Amazon S3</text>
+  <text x="870" y="355" text-anchor="middle" fill="#58a6ff" font-size="10">CloudWatch</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+</svg>
