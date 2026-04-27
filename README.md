@@ -1,6 +1,5 @@
 #Github Activity Real-Time Streaming Pipeline
 
-
 ##Tech Stack
 -AWS Kinesis Data Streams
 -AWS Lambda
