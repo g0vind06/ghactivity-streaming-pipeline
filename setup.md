@@ -84,7 +84,7 @@ Your Lambda function needs permissions to read from Kinesis and write to S3.
 pip install boto3 requests
 
 # Run the producer
-python producer/producer_dynamic.py
+python producer_dynamic.py
 ```
 
 The producer fetches data directly from `https://data.gharchive.org/` and streams it into Kinesis in real time.
@@ -92,7 +92,7 @@ The producer fetches data directly from `https://data.gharchive.org/` and stream
 ### Option B — Stream from local files
 
 ```python
-python producer/producer_local.py
+python producer_local.py
 ```
 
 Make sure your local `.json.gz` files follow the GH Archive format.
