@@ -42,7 +42,7 @@
    - **Runtime**: Python 3.12
    - **Architecture**: x86_64
 3. Click **Create function**
-4. Copy the code from `lambda/lambda_function.py` into the code editor
+4. Copy the code from `lambda_function.py` into the code editor
 5. Update the `bucket` variable with your S3 bucket name
 6. Click **Deploy**
 
